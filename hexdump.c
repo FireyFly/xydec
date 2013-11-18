@@ -15,9 +15,9 @@ void hexdump_line(uint8_t *buf, int len, int width) {
     ch = buf[i];
     if (i % 8 == 0) putchar(' ');
 
-         if (ch == 0)   printf("\033[38:5:238m");
-    else if (ch <  ' ') printf("\033[38:5:150m");
-    else if (ch >  '~') printf("\033[38:5:141m");
+         if (ch == 0)   printf("\033[38;5;238m");
+    else if (ch <  ' ') printf("\033[38;5;150m");
+    else if (ch >  '~') printf("\033[38;5;141m");
 
     printf(" %02x", ch);
     if (!is_printable(ch)) printf("\033[m");

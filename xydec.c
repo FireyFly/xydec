@@ -311,10 +311,10 @@ void packet_callback(struct pcap_record_header *header, uint8_t *buf, int size) 
 
   /* Check for duplicate packet */
   uint16_t csum = ff_checksum_of(payload, payload_len);
-  printf("\033[38:5:242m[%04x]\033[m", csum);
+  printf("\033[38;5;242m[%04x]\033[m", csum);
   for (int i=0; i<CHECKSUM_COUNT; i++) {
     if (checksums[i] == csum) {
-      printf("  \033[38:5:242m(repeated UDP payload)\033[m\n");
+      printf("  \033[38;5;242m(repeated UDP payload)\033[m\n");
       putchar('\n');
       return;
     }
@@ -323,7 +323,7 @@ void packet_callback(struct pcap_record_header *header, uint8_t *buf, int size) 
   checksum_idx %= CHECKSUM_COUNT;
 
   /* Packet header (metadata) */
-  printf("  {\033[1;38:5:%dm%08x\033[m:%04x} -> {\033[1;38:5:%dm%08x\033[m:%04x} [%3x] %d.%06d\n",
+  printf("  {\033[1m\033[38;5;%dm%08x\033[m:%04x} -> {\033[1m\033[38;5;%dm%08x\033[m:%04x} [%3x] %d.%06d\n",
          2 + hd_ip->source % 11, hd_ip->source,  hd_udp->source_port,
          2 + hd_ip->dest   % 11, hd_ip->dest,    hd_udp->dest_port,
          payload_len, header->ts_sec, header->ts_usec);
